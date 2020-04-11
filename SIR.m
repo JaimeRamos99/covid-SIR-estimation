@@ -209,68 +209,41 @@ hold on;
 
 function dx = epi(~,x)
 dx = zeros(48,1);
-dx(1) = -betalast*x(1)*x(2)/N;
- dx(2) = +betalast*x(1)*x(2)/N-gammalast*x(2);
- dx(3) = +gammalast*x(2);
- 
- dx(4) = -betamenos6*x(4)*x(5)/N;
- dx(5) = +betamenos6*x(4)*x(5)/N-gammamenos6*x(5);
- dx(6) = +gammamenos6*x(5);
- 
- dx(7) = -betamenos12*x(7)*x(8)/N;
- dx(8) = +betamenos12*x(7)*x(8)/N-gammamenos12*x(8);
- dx(9) = +gammamenos12*x(8);
- 
- dx(10) = -betamenos24*x(10)*x(11)/N;
- dx(11) = +betamenos24*x(10)*x(11)/N-gammamenos24*x(11);
- dx(12) = +gammamenos24*x(11);
- 
- dx(13) = -betalast*x(13)*x(14)/N;
- dx(14) = +betalast*x(13)*x(14)/N-gammalast*x(14);
- dx(15) = +gammalast*x(14);
- 
- dx(16) = -betamenos6*x(16)*x(17)/N;
- dx(17) = +betamenos6*x(16)*x(17)/N-gammamenos6*x(17);
- dx(18) = +gammamenos6*x(17);
- 
- dx(19) = -betamenos12*x(19)*x(20)/N;
- dx(20) = +betamenos12*x(19)*x(20)/N-gammamenos12*x(20);
- dx(21) = +gammamenos12*x(20);
- 
- dx(22) = -betamenos24*x(22)*x(23)/N;
- dx(23) = +betamenos24*x(22)*x(23)/N-gammamenos24*x(23);
- dx(24) = +gammamenos24*x(23);
- 
- dx(25) = -betalast*x(25)*x(26)/N;
- dx(26) = +betalast*x(25)*x(26)/N-gammalast*x(26);
- dx(27) = +gammalast*x(26);
- 
- dx(28) = -betamenos6*x(28)*x(29)/N;
- dx(29) = +betamenos6*x(28)*x(29)/N-gammamenos6*x(29);
- dx(30) = +gammamenos6*x(29);
- 
- dx(31) = -betamenos12*x(31)*x(32)/N;
- dx(32) = +betamenos12*x(31)*x(32)/N-gammamenos12*x(32);
- dx(33) = +gammamenos12*x(32);
- 
- dx(34) = -betamenos24*x(34)*x(35)/N;
- dx(35) = +betamenos24*x(34)*x(35)/N-gammamenos24*x(35);
- dx(36) = +gammamenos24*x(35);
- 
- dx(37) = -betalast*x(37)*x(38)/N;
- dx(38) = +betalast*x(37)*x(38)/N-gammalast*x(38);
- dx(39) = +gammalast*x(38);
- 
- dx(40) = -betamenos6*x(40)*x(41)/N;
- dx(41) = +betamenos6*x(40)*x(41)/N-gammamenos6*x(41);
- dx(42) = +gammamenos6*x(41);
- 
- dx(43) = -betamenos12*x(43)*x(44)/N;
- dx(44) = +betamenos12*x(43)*x(44)/N-gammamenos12*x(44);
- dx(45) = +gammamenos12*x(44);
- 
- dx(46) = -betamenos24*x(46)*x(47)/N;
- dx(47) = +betamenos24*x(46)*x(47)/N-gammamenos24*x(47);
- dx(48) = +gammamenos24*x(47);
+longitud = size(dx,1);
+cont = 1;
+for i=1:longitud
+    
+     if(mod(i,12)==0)
+         dx(i-2) = -betamenos24*x(i-2)*x(i-1)/N;
+        dx(i-1) = +betamenos24*x(i-2)*x(i-1)/N-gammamenos24*x(i-1);
+        dx(i)= +gammamenos24*x(i-1);
+        cont=0;
+    end   
+   
+    if(cont==9)
+     dx(i-2) = -betamenos12*x(i-2)*x(i-1)/N;
+     dx(i-1) = +betamenos12*x(i-2)*x(i-1)/N-gammamenos12*x(i-1);
+     dx(i) = +gammamenos12*x(i-1);
+
+    end
+    
+    if(cont==6)   
+      dx(i-2) = -betamenos6*x(i-2)*x(i-1)/N;
+      dx(i-1) = +betamenos6*x(i-2)*x(i-1)/N-gammamenos6*x(i-1);
+      dx(i) = +gammamenos6*x(i-1);   
+   
+    end
+    
+     if(cont==3)   
+     dx(i-2) = -betalast*x(i-2)*x(i-1)/N;
+     dx(i-1) = +betalast*x(i-2)*x(i-1)/N-gammalast*x(i-1);
+     dx(i) = +gammalast*x(i-1);
+  
+    end
+    
+    cont = cont+1;
+
+end
+
  end
 end
