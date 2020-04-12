@@ -105,107 +105,121 @@ tmax=1000;
 [t,x]=ode45(@epi,[0 tmax],[x0,y0,z0,xmenos6,ymenos6,zmenos6,xmenos12,ymenos12,zmenos12,xmenos24,ymenos24,zmenos24,x010,y010,z0,x050,y050,z0,x0100,y0100,z0,xmenos610, ...
 ymenos610,zmenos6,xmenos650,ymenos650,zmenos6,xmenos6100,ymenos6100,zmenos6,xmenos1210,ymenos1210,zmenos12,xmenos1250,ymenos1250,zmenos12,xmenos12100,ymenos12100,zmenos12, ...
 xmenos2410,ymenos2410,zmenos24,xmenos2450,ymenos2450,zmenos24,xmenos24100,ymenos24100,zmenos24]);
-subplot(3,4,1),plot(t,x(:,1),'m'),title('S')
-hold on;
-subplot(3,4,2),plot(t,x(:,4),'m'),title('S')
-hold on;
-subplot(3,4,3),plot(t,x(:,7),'m'),title('S')
-hold on;
-subplot(3,4,4),plot(t,x(:,10),'m'),title('S')
-hold on;
-subplot(3,4,1),plot(t,x(:,13),'b--'),title('S')
-hold on;
-subplot(3,4,1),plot(t,x(:,16),'b--'),title('S')
-hold on;
-subplot(3,4,1),plot(t,x(:,19),'b--'),title('S')
-hold on;
-subplot(3,4,2),plot(t,x(:,22),'r--'),title('S')
-hold on;
-subplot(3,4,2),plot(t,x(:,25),'r--'),title('S')
-hold on;
-subplot(3,4,2),plot(t,x(:,28),'r--'),title('S (-6)')
-hold on;
-subplot(3,4,3),plot(t,x(:,31),'y--'),title('S')
-hold on;
-subplot(3,4,3),plot(t,x(:,34),'y--'),title('S')
-hold on;
-subplot(3,4,3),plot(t,x(:,37),'y--'),title('S (-12)')
-hold on;
-subplot(3,4,4),plot(t,x(:,40),'g--'),title('S')
-hold on;
-subplot(3,4,4),plot(t,x(:,43),'g--'),title('S')
-hold on;
-subplot(3,4,4),plot(t,x(:,46),'g--'),title('S (-24)')
 
 
+% SECCION SUSCEPTIBLES
+figure
+var=-4;
+cont=1;
 
+colores={'m','b--','r--','y--','g--'};
+indicecolor=1;
+for i=1:3:46
+    
+ subplot(3,4,cont),plot(t,x(:,i),char(colores(indicecolor))),title('S');
+ hold on;
 
-subplot(3,4,5),plot(t,x(:,2),'m'),title('I')
-hold on;
-subplot(3,4,6),plot(t,x(:,5),'m'),title('I')
-hold on;
-subplot(3,4,7),plot(t,x(:,8),'m'),title('I')
-hold on;
-subplot(3,4,8),plot(t,x(:,11),'m'),title('I')
-hold on;
-subplot(3,4,5),plot(t,x(:,14),'b--'),title('I')
-hold on;
-subplot(3,4,5),plot(t,x(:,17),'b--'),title('I')
-hold on;
-subplot(3,4,5),plot(t,x(:,20),'b--'),title('I')
-hold on;
-subplot(3,4,6),plot(t,x(:,23),'r--'),title('I')
-hold on;
-subplot(3,4,6),plot(t,x(:,26),'r--'),title('I')
-hold on;
-subplot(3,4,6),plot(t,x(:,29),'r--'),title('I (-6)')
-hold on;
-subplot(3,4,7),plot(t,x(:,32),'y--'),title('I')
-hold on;
-subplot(3,4,7),plot(t,x(:,35),'y--'),title('I')
-hold on;
-subplot(3,4,7),plot(t,x(:,38),'y--'),title('I (-12)')
-hold on;
-subplot(3,4,8),plot(t,x(:,41),'g--'),title('I')
-hold on;
-subplot(3,4,8),plot(t,x(:,44),'g--'),title('I')
-hold on;
-subplot(3,4,8),plot(t,x(:,47),'g--'),title('I (-24)')
+ if(cont==4 && i <27)
+     cont = 1;
+     indicecolor = indicecolor+1;
+    
+ end
+ if(var==2)
+     cont = cont+1;
+     indicecolor = indicecolor+1;
+     var=-1;
+ end
 
+ 
+ if(cont==5 && i > 27)
+     cont = 4;
+    
+ end
+ if(i<8)
+      cont=cont+1;
+ end
+  fprintf("ESSS %d",cont)
+  var = var+1;
+  set(gca,'XTick',[0; 500; 1000],'YTick', 0:10000000:100000000,'ButtonDownFcn',@createnew_fig)
+end
 
+set(gca,'XTickMode', 'auto');
+hold on
 
-subplot(3,4,9),plot(t,x(:,3),'m'),title('R ')
-hold on;
-subplot(3,4,10),plot(t,x(:,6),'m'),title('R')
-hold on;
-subplot(3,4,11),plot(t,x(:,9),'m'),title('R')
-hold on;
-subplot(3,4,12),plot(t,x(:,12),'m'),title('R')
-hold on;
-subplot(3,4,9),plot(t,x(:,15),'b--'),title('R')
-hold on;
-subplot(3,4,9),plot(t,x(:,18),'b--'),title('R')
-hold on;
-subplot(3,4,9),plot(t,x(:,21),'b--'),title('R')
-hold on;
-subplot(3,4,10),plot(t,x(:,24),'r--'),title('R')
-hold on;
-subplot(3,4,10),plot(t,x(:,27),'r--'),title('R')
-hold on;
-subplot(3,4,10),plot(t,x(:,30),'r--'),title('R (-6)')
-hold on;
-subplot(3,4,11),plot(t,x(:,33),'y--'),title('R')
-hold on;
-subplot(3,4,11),plot(t,x(:,36),'y--'),title('R')
-hold on;
-subplot(3,4,11),plot(t,x(:,39),'y--'),title('R (-12)')
-hold on;
-subplot(3,4,12),plot(t,x(:,42),'g--'),title('R')
-hold on;
-subplot(3,4,12),plot(t,x(:,45),'g--'),title('R')
-hold on;
-subplot(3,4,12),plot(t,x(:,48),'g--'),title('R (-24)')
-hold on;
+%SECCION INFECTADOS
+
+var=-4;
+cont=5;
+colores={'m','b--','r--','y--','g--'};
+indicecolor=1;
+for i=2:3:47
+    
+ subplot(3,4,cont),plot(t,x(:,i),char(colores(indicecolor))),title('I');
+ hold on;
+
+ if(cont==8 && i <28)
+     cont = 5;
+     indicecolor = indicecolor+1;
+ end
+ if(var==2)
+     cont = cont+1;
+     indicecolor = indicecolor+1;
+     var=-1;
+ end
+ if(cont==9 && i > 28)
+     cont = 8;
+ end
+ if(i<9)
+      cont=cont+1;
+ end
+  var = var+1;
+  set(gca,'XTick',[0; 500; 1000],'YTick', 0:10000000:100000000,'ButtonDownFcn',@createnew_fig)
+end
+
+set(gca,'XTickMode', 'auto');
+hold on
+
+% SECCION RECUPERADOS
+var=-4;
+cont=9;
+
+contveces=0;
+
+indicecolor=1;
+for i=3:3:48
+ subplot(3,4,cont),plot(t,x(:,i),char(colores(indicecolor))),title('R ');
+ hold on;
+ if(cont==12 && i <32)
+     cont = 8;
+     indicecolor = indicecolor+1;  
+ end
+ if(var==2)
+     cont = cont+1;
+     indicecolor = indicecolor+1;
+     var=-1;
+ end
+ if(cont==13 && i > 32)
+     cont = 12;
+ end
+ if(i<13)
+      cont=cont+1;
+ end
+  var = var+1;
+  set(gca,'XTick',[0; 500; 1000],'YTick', 0:10000000:100000000,'ButtonDownFcn',@createnew_fig)
+end
+
+set(gca,'XTickMode', 'auto');
+
+function createnew_fig(cb,evendata)
+
+hh = copyobj(cb,figure);
+
+set(hh,'ButtonDownFcn',[]);
+
+set(hh, 'Position', get(0, 'DefaultAxesPosition'));
+end
+
+%SOLUCIÓN DE ECUACIONES DIFERENCIALES ORDINARIAS
 
 function dx = epi(~,x)
 dx = zeros(48,1);
