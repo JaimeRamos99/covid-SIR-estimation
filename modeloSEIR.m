@@ -49,16 +49,21 @@ function modeloSEIR
         for j=1:1000
             fila=i;
             columna=j;
-            [t,y]=ode45(@epi,[0 1000],[Sgorro(i,j),Egorro(i,j),Igorro(i,j),r]);
-            plot(t,y(:,3))
+            [t,y]=ode45(@epi,[0 200],[Sgorro(i,j),Egorro(i,j),Igorro(i,j),r]);
+            plot(t,y(:,1), 'g')
+            plot(t,y(:,2), 'b')
+            plot(t,y(:,3), 'r')
+            plot(t,y(:,4), 'y')
+            xlabel('días siguientes') 
+            ylabel('Colombianos') 
             hold on;
         end
     end
     function dy = epi(~,y)
         dy = zeros(4,1);
-        dy(1) = B - beta * y(1) * y(3) - MIUgorro(fila,columna) * y(1); %susceptibles EDO
-        dy(2) = beta * y(1) * y(3) - (Epsilon + MIUgorro(fila,columna)) * y(2);%expuestos EDO
-        dy(3) = Epsilon * y(2) - (Gamma + MIUgorro(fila,columna)) * y(3);%infectados EDO
-        dy(4) = Gamma * y(3) - MIUgorro(fila,columna) * y(4);%recobrados EDO
+        dy(1) = -beta * y(1) * y(3) / N; %susceptibles EDO
+        dy(2) = +beta * y(1) * y(3) / N - Epsilon * y(2);%expuestos EDO
+        dy(3) = +Epsilon * y(2) - Gamma * y(3);%infectados EDO
+        dy(4) = +Gamma * y(3);%recobrados EDO
     end
 end
