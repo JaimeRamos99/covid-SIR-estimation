@@ -20,9 +20,6 @@ function modeloSIR2
     %crea las semillas (los 16 casos)
     for c = 1:4
         yPerturbado =  [yPerturbado; (3*perturbaciones + inputsPorDia(1,c))'];%vector columna
-        xPerturbado = [xPerturbado; (N - (3*perturbaciones + inputsPorDia(1,c))-inputsPorDia(2,c))'];
-        gammaPerturbado = [gammaPerturbado;(ones(1,4)*inputsPorDia(2,c)./(3*perturbaciones + inputsPorDia(1,c)))'];
-        betaPerturbado = 2.5 * gammaPerturbado;
     end
     contador=0;
     for c=1:16
