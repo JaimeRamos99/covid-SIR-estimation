@@ -1,6 +1,5 @@
 function modeloSIR2
     clc;
-    %población colombiana estimada
     N=50547214;
     %la primera fila es para 'hoy', la segunda para 6 días atrás y así
     %sucesivamente
